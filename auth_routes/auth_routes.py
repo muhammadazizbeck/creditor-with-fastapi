@@ -57,7 +57,7 @@ async def register(user:RegisterModel):
 @auth_router.post('/login',status_code=status.HTTP_200_OK)
 async def login(user:LoginModel,Authorize:AuthJWT=Depends()):
     access_token_lifetime = datetime.timedelta(minutes=60)
-    refresh_token_lifetime = datetime.timedelta(days=15)
+    refresh_token_lifetime = datetime.timedelta(days=365)
     db_user = session.query(User).filter(
         or_(User.username==user.username_or_email,
             User.email==user.username_or_email)

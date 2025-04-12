@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 
 class RegisterModel(BaseModel):
@@ -34,4 +35,13 @@ class LoginModel(BaseModel):
                 'password':"nonamepass"
             }
         }
+
+class SettingModel(BaseModel):
+    currency:Optional[str]="UZS"
+    reminder_enabled:Optional[bool]
+    reminder_time:Optional[datetime]=None
+
+    class Config:
+        from_attributes = True
+
 

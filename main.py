@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from auth_routes import auth_router
-from monitoring_routes import monitoring_router
-from settings_routes import settings_router
-from debts_routes import debts_router
+from auth_routes.auth_routes import auth_router
+from monitoring_routes.monitoring_routes import monitoring_router
+from settings_routes.settings_routes import settings_router
+from debts_routes.debts_routes import debts_router
 from schemas import Settings
 from fastapi_jwt_auth import AuthJWT
 
