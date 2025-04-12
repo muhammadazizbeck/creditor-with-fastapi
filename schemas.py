@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
+from models import DebtType
 
 
 class RegisterModel(BaseModel):
@@ -43,5 +44,40 @@ class SettingModel(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class MonitoringResponse(BaseModel):
+    total_owed_to: float
+    total_owed_by: float
+    balance: float
+
+class DebtCreate(BaseModel):
+    full_name: str
+    amount: float
+    currency: str
+    description: Optional[str] = None
+    debt_type: DebtType
+    return_date: Optional[datetime] = None
+
+class DebtUpdate(BaseModel):
+    full_name: Optional[str]
+    amount: Optional[float]
+    currency: Optional[str]
+    description: Optional[str]
+    debt_type: Optional[DebtType]
+    return_date: Optional[datetime]
+
+class DebtResponse(BaseModel):
+    id: int
+    full_name: str
+    amount: float
+    currency: str
+    description: Optional[str]
+    debt_type: DebtType
+    given_date: datetime
+    return_date: Optional[datetime]
+
+    class Config:
+        orm_mode = True
 
 

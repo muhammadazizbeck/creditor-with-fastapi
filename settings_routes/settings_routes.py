@@ -50,6 +50,8 @@ async def get_user_settings(Authorize: AuthJWT = Depends()):
         'data': data
     })
 
+from fastapi.encoders import jsonable_encoder
+
 @settings_router.put('/update', status_code=status.HTTP_200_OK)
 async def update_user_settings(update_model: SettingModel, Authorize: AuthJWT = Depends()):
     try:
@@ -80,8 +82,11 @@ async def update_user_settings(update_model: SettingModel, Authorize: AuthJWT = 
     session.commit()
     session.refresh(settings)
 
-    return settings
-
+    return jsonable_encoder({
+        'currency': settings.currency,
+        'reminder_enabled': settings.reminder_enabled,
+        'reminder_time': settings.reminder_time
+    })
 
 
 
